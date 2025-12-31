@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Order Confirmation</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #c3ec52, #0ba29d);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .confirm-box {
+      background: white;
+      padding: 30px;
+      width: 420px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+
+    .confirm-box h1 {
+      color: green;
+      margin-bottom: 10px;
+    }
+
+    .confirm-box p {
+      margin: 8px 0;
+      color: #444;
+    }
+
+    .success-icon {
+      font-size: 60px;
+      color: green;
+    }
+
+    .btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #ff5722;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="confirm-box">
+  <div class="success-icon">✅</div>
+  <h1>Order Confirmed!</h1>
+  <p>Thank you for shopping with us 🎉</p>
+  <p>Your order has been placed successfully.</p>
+  <p><b>Order ID:</b> <span id="orderId"></span></p>
+
+  <button class="btn" onclick="goHome()">Continue Shopping</button>
+</div>
+
+<script>
+  // Generate random order ID
+  document.getElementById("orderId").innerText =
+    "ORD" + Math.floor(Math.random() * 1000000);
+
+  function goHome() {
+    window.location.href = "index.html";
+  }
+</script>
+
+</body>
+</html>

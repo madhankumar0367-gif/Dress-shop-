@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login | Fashion Dress Shop</title>
+  <style>
+    /* RESET */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      height: 100vh;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .login-box {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 30px 25px;
+      width: 350px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      text-align: center;
+      position: absolute; /* allows toggling login/register */
+    }
+
+    .login-box h2 {
+      margin-bottom: 20px;
+      color: #ff4081;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .login-box button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      background: #ff4081;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .login-box button:hover {
+      background: #e91e63;
+    }
+
+    .login-box .link {
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    .login-box .link a {
+      text-decoration: none;
+      color: #ff4081;
+    }
+
+    .login-box .link a:hover {
+      text-decoration: underline;
+    }
+
+    /* Smooth fade in/out for login/register */
+    .login-box {
+      transition: 0.5s;
+    }
+  </style>
+</head>
+<body>
+
+<div class="login-box" id="loginBox">
+  <h2>Login</h2>
+
+  <input type="text" id="username" placeholder="Username">
+  <input type="password" id="password" placeholder="Password">
+
+  <button onclick="login()">Login</button>
+
+  <p class="link">
+    New user? <a href="#" onclick="showRegister()">Create New Account</a>
+  </p>
+
+  <p id="msg"></p>
+</div>
+
+<!-- Register Box -->
+<div class="login-box" id="registerBox" style="display:none;">
+  <h2>Create Account</h2>
+
+  <input type="text" id="newUser" placeholder="New Username">
+  <input type="password" id="newPass" placeholder="New Password">
+
+  <button onclick="register()">Register</button>
+
+  <p class="link">
+    Already have an account? <a href="#" onclick="showLogin()">Login</a>
+  </p>
+
+  <p id="regMsg"></p>
+</div>
+
+<script>
+function showRegister() {
+  document.getElementById("loginBox").style.display = "none";
+  document.getElementById("registerBox").style.display = "block";
+}
+
+function showLogin() {
+  document.getElementById("registerBox").style.display = "none";
+  document.getElementById("loginBox").style.display = "block";
+}
+
+function login() {
+  let user = document.getElementById("username").value;
+  let pass = document.getElementById("password").value;
+
+  if(user && pass){
+    localStorage.setItem("loggedIn","true");
+    alert("Login Successful ✅");
+    window.location.href = "index.html";
+  } else {
+    alert("Please enter username and password ❗");
+  }
+}
+
+function register() {
+  let newUser = document.getElementById("newUser").value;
+  let newPass = document.getElementById("newPass").value;
+
+  if(newUser && newPass){
+    localStorage.setItem("user_"+newUser, newPass);
+    alert("Account Created Successfully ✅");
+    showLogin();
+  } else {
+    alert("Please fill all fields ❗");
+  }
+}
+</script>
+
+</body>
+</html>

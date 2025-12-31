@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Cart</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+      min-height: 100vh;
+    }
+
+    .cart-container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .cart-item img {
+      width: 90px;
+      height: 90px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .cart-item h4 {
+      flex: 1;
+      margin-left: 15px;
+    }
+
+    .remove-btn {
+      background: crimson;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .total-box {
+      text-align: right;
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .checkout-btn {
+      background: #4caf50;
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+      float: right;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="cart-container">
+  <h2>🛒 My Cart</h2>
+  <div id="cartBox"></div>
+  <div class="total-box" id="total"></div>
+  <button class="checkout-btn" onclick="checkout()">Checkout</button>
+</div>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let box = document.getElementById("cartBox");
+let total = 0;
+
+function showCart() {
+  box.innerHTML = "";
+  total = 0;
+
+  if (cart.length === 0) {
+    box.innerHTML = "<p>Your cart is empty</p>";
+    document.getElementById("total").innerText = "";
+    return;
+  }
+
+  cart.forEach((item, i) => {
+    total += item.price;
+    box.innerHTML += `
+      <div class="cart-item">
+        <img src="${item.image}">
+        <h4>${item.name}</h4>
+        <p>₹${item.price}</p>
+        <button class="remove-btn" onclick="removeItem(${i})">❌</button>
+      </div>
+    `;
+  });
+
+  document.getElementById("total").innerText = "Total: ₹" + total;
+}
+
+function removeItem(i) {
+  cart.splice(i, 1);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  showCart();
+}
+
+function checkout() {
+  window.location.href = "checkout.html";
+}
+
+showCart();
+</script>
+
+</body>
+</html>
